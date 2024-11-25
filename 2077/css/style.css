@@ -1,7 +1,7 @@
 /* 全局样式 */
 body {
     margin: 0;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;    
     
     background-color: rgb(233,242,107); /* 浅黄色背景 */
 }
@@ -391,14 +391,14 @@ svg {
     text-align: center;
     padding: 40px 20px;
     background-color: #ffffff;
-    overflow: hidden; /* 防止子内容超出边界 */
+    overflow: visible; /* 防止子内容超出边界 */
 }
 
 .map-container {
     margin: 0 auto;
-    max-width: 1026px;
+    max-width: 1080px;
     position: relative;
-    overflow: hidden; /* 防止子元素溢出 */
+    overflow: visible; /* 防止子元素溢出 */
 }
 
 .map-title {
@@ -416,12 +416,14 @@ svg {
     border: 2px solid #929191; /* 边框样式 */
     overflow: hidden;
     position: relative; /* 防止绝对定位超出容器 */
+    z-index: 1;
 }
 
 /* map-text */
 .map-content {
     text-align: center;
-    padding: 20px;
+    padding: 5px;
+    padding-bottom: 0px;
     background-color: rgb(255, 255, 255);
 }
 
@@ -431,7 +433,7 @@ svg {
 }
 
 .map_textad{
-    padding-top: 30px;
+    padding-top: 0px;
     font-size: 24px;
     line-height: 1.2;
 

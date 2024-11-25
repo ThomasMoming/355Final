@@ -7,7 +7,7 @@
     <!-- 引入 Orbitron 字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <!-- 加载 CSS 样式 -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/vis.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
 </head>
@@ -71,6 +71,23 @@
             </p>
         </div>
     </section>
+
+    <!-- chart section -->
+    <section class="chart-section">
+        <h2 class="chart-title">Total number of hours played by CHINESE, ENGLISH, and OTHER players.</h2>
+        <div class="chart-container">
+            <!-- 图表 -->
+            <div id="bar-chart"></div>
+            <!-- 文本描述 -->
+            <div class="chart-description">
+                <p>
+                    The total number of hours played by Chinese players can be used to determine the acceptance and enthusiasm of Cyberpunk 2077 by players in that language region. If Chinese players account for a higher percentage of total playtime, it indicates that the game has a wide reach in the Chinese-speaking market and that players are willing to spend a significant amount of time exploring the game's content.
+                </p>
+            </div>
+        </div>
+        <script src="js/vis_bar.js"></script>
+    </section>
+
 
     <!-- footer -->
     <footer class="footer">
