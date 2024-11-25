@@ -118,3 +118,120 @@ console.log("Labels added:", labels);
 });
 
 
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("timeline.js loaded");
+
+    // Timeline 数据
+    const timelineData = [
+        { date: "April 14, 2022", sales: 18 },
+        { date: "Sep 28, 2022", sales: 20 },
+        { date: "Dec 20, 2022", sales: 13 },
+        { date: "Oct 5, 2023", sales: 25 },
+    ];
+
+    console.log("Timeline Data:", timelineData);
+
+    // 动态获取 SVG 容器宽度和高度
+    const timelineContainer = document.getElementById("timeline-box");
+    if (!timelineContainer) {
+        console.error("SVG container with id 'timeline-box' not found.");
+        return;
+    }
+    const timelineWidth = timelineContainer.clientWidth || 500;
+    const timelineHeight = timelineContainer.clientHeight || 350;
+    console.log("Timeline container dimensions:", { timelineWidth, timelineHeight });
+
+    // 设置图表宽高和边距
+    const timelineMargin = { top: 50, right: 20, bottom: 50, left: 70 };
+    const timelineInnerWidth = timelineWidth - timelineMargin.left - timelineMargin.right;
+    const timelineInnerHeight = timelineHeight - timelineMargin.top - timelineMargin.bottom;
+
+    // 创建 SVG 容器
+    const timelineSvg = d3
+        .select("#timeline-box")
+        .attr("width", timelineWidth)
+        .attr("height", timelineHeight)
+        .append("g")
+        .attr("transform", `translate(${timelineMargin.left},${timelineMargin.top})`);
+
+    console.log("Timeline SVG container created:", timelineSvg);
+
+    // X轴比例尺（时间）
+    const xTimelineScale = d3
+        .scalePoint()
+        .domain(timelineData.map((d) => d.date))
+        .range([0, timelineInnerWidth])
+        .padding(0.5);
+    console.log("X Scale for timeline:", xTimelineScale.domain(), xTimelineScale.range());
+
+    // Y轴比例尺（销售量）
+    const yTimelineScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(timelineData, (d) => d.sales) * 1.1]) // 给最大值增加空间
+        .range([timelineInnerHeight, 0]);
+    console.log("Y Scale for timeline:", yTimelineScale.domain(), yTimelineScale.range());
+
+    // 添加 X轴
+    timelineSvg.append("g")
+        .attr("transform", `translate(0, ${timelineInnerHeight})`)
+        .call(d3.axisBottom(xTimelineScale))
+        .selectAll("text")
+        .style("text-anchor", "middle")
+        .style("fill", "white");
+    timelineSvg.selectAll(".domain, .tick line")
+        .attr("stroke", "white"); // 刻度尺颜色
+    console.log("Timeline X Axis added");
+
+    // 添加 Y轴
+    timelineSvg.append("g")
+        .call(d3.axisLeft(yTimelineScale).ticks(5))
+        .selectAll("text")
+        .style("fill", "white");
+    timelineSvg.selectAll(".domain, .tick line")
+        .attr("stroke", "white"); // 刻度尺颜色
+    console.log("Timeline Y Axis added");
+
+    // 绘制折线
+    timelineSvg.append("path")
+        .datum(timelineData)
+        .attr("fill", "none")
+        .attr("stroke", "yellow") // 折线颜色
+        .attr("stroke-width", 2)
+        .attr("d", d3.line()
+            .x((d) => xTimelineScale(d.date))
+            .y((d) => yTimelineScale(d.sales))
+        );
+    console.log("Timeline line path created");
+
+    // 添加数据点
+    timelineSvg.selectAll(".dot")
+        .data(timelineData)
+        .enter()
+        .append("circle")
+        .attr("class", "dot")
+        .attr("cx", (d) => xTimelineScale(d.date))
+        .attr("cy", (d) => yTimelineScale(d.sales))
+        .attr("r", 5)
+        .attr("fill", "white"); // 数据点颜色
+    console.log("Timeline dots added");
+
+    // 添加数据点标签
+    timelineSvg.selectAll(".label")
+        .data(timelineData)
+        .enter()
+        .append("text")
+        .attr("class", "label")
+        .attr("x", (d) => xTimelineScale(d.date))
+        .attr("y", (d) => yTimelineScale(d.sales) - 10)
+        .attr("text-anchor", "middle")
+        .style("fill", "white")
+        .text((d) => d.sales);
+    console.log("Timeline labels added");
+});
+
+
+
+
