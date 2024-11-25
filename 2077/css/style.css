@@ -2,6 +2,7 @@
 body {
     margin: 0;
     font-family: 'Times New Roman', Times, serif;
+    
     background-color: rgb(233,242,107); /* 浅黄色背景 */
 }
 
@@ -384,4 +385,54 @@ svg {
     margin: 0 auto; /* 居中 */
     max-width: 800px; /* 最大宽度，限制内容宽度 */
     padding-top: 40px;
+}
+
+.map-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    overflow: hidden; /* 防止子内容超出边界 */
+}
+
+.map-container {
+    margin: 0 auto;
+    max-width: 1026px;
+    position: relative;
+    overflow: hidden; /* 防止子元素溢出 */
+}
+
+.map-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#map-box {
+    width: 100%;
+    height: 500px; /* 固定高度，可根据需求调整 */
+    background-color: #d3d3d3; /* 地图背景色 */
+    border-radius: 10px; /* 圆角 */
+    border: 2px solid #929191; /* 边框样式 */
+    overflow: hidden;
+    position: relative; /* 防止绝对定位超出容器 */
+}
+
+/* map-text */
+.map-content {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+}
+
+.map_content-box {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.map_textad{
+    padding-top: 30px;
+    font-size: 24px;
+    line-height: 1.2;
+
 }
