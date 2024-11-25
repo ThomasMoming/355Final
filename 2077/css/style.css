@@ -149,6 +149,7 @@ nav ul li a:hover {
     gap: 20px; /* 设置网格项之间的间距 */
     padding: 20px;
     padding-top: 80px;
+    
 }
 
 /* 第一行列宽比例：左 40%，右 60% */
@@ -156,6 +157,7 @@ nav ul li a:hover {
     display: grid;
     grid-template-columns: 40% 60%; /* 左 40%，右 60% */
     gap: 20px; /* 每列之间的间距 */
+    
 }
 
 /* 第二行列宽比例：左 60%，右 40% */
@@ -163,6 +165,7 @@ nav ul li a:hover {
     display: grid;
     grid-template-columns: 60% 40%; /* 左 60%，右 40% */
     gap: 20px;
+
 }
 
 /* 第三行列宽比例：左 40%，右 60% */
@@ -189,14 +192,32 @@ nav ul li a:hover {
 
 /* 图表盒子 */
 .chart-box, .timeline-box {
+    width: auto;
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 350px; /* 预留图表高度 */
+    display: block;
+    
+}
+.bar {
+    fill: rgb(233,242,107); /* 确保柱状图颜色明显 */
+}
+.label {
+    font-size: 12px; /* 设置合理字体大小 */
+    fill: white; /* 确保标签颜色可见 */
 }
 
-.chart-box img, 
-.timeline-box img, 
+/* SVG 样式 */
+svg {
+    width: 100%; /* 确保 SVG 填满父容器宽度 */
+    height: 100%; /* 确保 SVG 填满父容器高度 */
+    border-radius: 10px; /*为 SVG 添加圆角 */
+    background-color: black;
+    overflow: visible;
+}
+
+ 
 .image-box img {
     width: 100%;
     height: auto;

@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Metal+Mania&display=swap" rel="stylesheet">
     <!-- 加载 CSS 样式 -->
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    
 
 </head>
 <body>
@@ -86,7 +88,7 @@
 
         <!-- 右上图表 -->
             <div class="box chart-box">
-                
+                <svg id="sales-chart"></svg>
             </div>
         </div>
         
@@ -95,7 +97,7 @@
         <div class="layout-row-2">
             <!-- 中左图表 -->
             <div class="box timeline-box">
-                
+                <svg id="timeline-box"></svg>
             </div>
 
             <!-- 中右文本 -->
@@ -194,6 +196,6 @@
             </ul>
         </div>
     </footer>
-
+    <script src="js/main.js"></script>
 </body>
 </html>
