@@ -1,67 +1,126 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const data = [
-        { language: "Chinese", hours: 50000 },
-        { language: "English", hours: 70000 },
-        { language: "Other", hours: 20000 },
+document.addEventListener("DOMContentLoaded", async function () {
+    // Load CSV data
+    const data = await d3.csv("data.set/cyberpunk_2077_filtered.csv");
+
+    // Aggregate playtime by language
+    const aggregatedData = d3.rollups(
+        data,
+        (v) => d3.sum(v, (d) => +d.playtime_at_review), // Sum of playtime_at_review
+        (d) => d.language // Group by language
+    )
+        .map(([language, playtime]) => ({ language, playtime }))
+        .sort((a, b) => b.playtime - a.playtime); // Sort by playtime descending
+
+    // Extract top 3 languages and group others into "Other"
+    const topLanguages = aggregatedData.slice(0, 3); // Top 3 languages
+    const otherPlaytime = aggregatedData
+        .slice(3)
+        .reduce((sum, d) => sum + d.playtime, 0); // Sum of all other languages
+
+    const finalData = [
+        ...topLanguages,
+        { language: "Other", playtime: otherPlaytime },
     ];
 
-    // 设置SVG宽高和边距
-    const margin = { top: 30, right: 30, bottom: 40, left: 50 },
-        width = 600 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+    console.log("Final Aggregated Data:", finalData);
 
-    // 创建SVG
-    const svg = d3
-        .select("#bar-chart")
+    // Get container dimensions dynamically
+    const container = d3.select("#bar-chart");
+    const containerWidth = container.node().getBoundingClientRect().width;
+    const containerHeight = container.node().getBoundingClientRect().height;
+
+    // Set SVG dimensions and margins
+    const margin = { top: 40, right: 20, bottom: 60, left: 60 };
+    const width = containerWidth - margin.left - margin.right;
+    const height = containerHeight - margin.top - margin.bottom;
+
+    // Create SVG container
+    const svg = container
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", containerWidth)
+        .attr("height", containerHeight)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // X轴比例尺
+    // X-axis scale
     const x = d3
         .scaleBand()
-        .domain(data.map((d) => d.language))
+        .domain(finalData.map((d) => d.language))
         .range([0, width])
         .padding(0.2);
 
-    // Y轴比例尺
+    // Y-axis scale
     const y = d3
         .scaleLinear()
-        .domain([0, d3.max(data, (d) => d.hours)])
+        .domain([0, d3.max(finalData, (d) => d.playtime)])
+        .nice()
         .range([height, 0]);
 
-    // 添加X轴
+    // Add X-axis
     svg.append("g")
-        .attr("transform", `translate(0, ${height})`)
+        .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(x))
         .selectAll("text")
         .attr("transform", "translate(0,10)")
         .style("text-anchor", "middle");
 
-    // 添加Y轴
-    svg.append("g").call(d3.axisLeft(y));
-
-    // 绘制条形图
-    svg.selectAll("bars")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", (d) => x(d.language))
-        .attr("y", (d) => y(d.hours))
-        .attr("width", x.bandwidth())
-        .attr("height", (d) => height - y(d.hours))
-        .attr("fill", (d, i) =>
-            i === 0 ? "steelblue" : i === 1 ? "orange" : "green"
+    // Add Y-axis with compressed units
+    svg.append("g")
+        .call(
+            d3.axisLeft(y).tickFormat((d) => `${Math.round(d / 1_000_000)}M`) // Compress units to M
         );
 
-    // 添加标题
+    // Draw bars
+    svg.selectAll(".bar")
+        .data(finalData)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", (d) => x(d.language))
+        .attr("y", (d) => y(d.playtime))
+        .attr("width", x.bandwidth())
+        .attr("height", (d) => height - y(d.playtime))
+        .attr("fill", (d, i) =>
+            i % 3 === 0 ? "steelblue" : i % 3 === 1 ? "orange" : "green"
+        );
+
+    // Add playtime labels on top of bars
+    svg.selectAll(".bar-label")
+        .data(finalData)
+        .enter()
+        .append("text")
+        .attr("class", "bar-label")
+        .attr("x", (d) => x(d.language) + x.bandwidth() / 2)
+        .attr("y", (d) => y(d.playtime) - 5) // Position above the bar
+        .attr("text-anchor", "middle")
+        .style("font-size", "12px")
+        .style("font-weight", "bold")
+        .text((d) => `${(d.playtime / 1_000_000).toFixed(2)}M`); // Display compressed value
+
+    // Add chart title
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", 0 - margin.top / 2)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
+        
         .text("Total Play Hours by Player Language");
+
+    // Add X-axis label
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 10)
+        .attr("text-anchor", "middle")
+        .style("font-size", "12px")
+        .text("Player Language");
+
+    // Add Y-axis label
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 10)
+        .attr("x", 0 - height / 2)
+        .attr("text-anchor", "middle")
+        .style("font-size", "12px")
+        .text("Total Playtime (million hours)");
 });
