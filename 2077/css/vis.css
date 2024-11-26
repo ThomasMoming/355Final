@@ -391,7 +391,7 @@ nav ul li a:hover {
 
 .animation_textad {
     margin: 0 auto; /* 内容居中 */
-    padding: 20px 10px; /* 增加上下内边距 */
+    padding: 20px 10px; /* 5加上下内边距 */
     font-size: 20px;
     line-height: 1.5; /* 增加行高，提高可读性 */
     color: #333; /* 字体颜色为深灰，增强对比度 */
