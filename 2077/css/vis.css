@@ -289,7 +289,7 @@ nav ul li a:hover {
     font-family: "Orbitron", sans-serif;
     font-size: 24px;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 #timeline-box {
@@ -302,3 +302,38 @@ nav ul li a:hover {
     position: relative; /* 防止绝对定位超出容器 */
     z-index: 1;
 }
+
+/* timeline-text */
+
+.timeline-text-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.timeline-text-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.timeline-text-container {
+    display: flex;
+    justify-content: center; /* 水平方向居中 */
+    align-items: center; /* 垂直方向居中 */
+    gap: 40px;
+    margin: 0 auto;
+    max-width: 1026px;
+    padding-top: 40px;
+}
+
+.timeline-text-description1,
+.timeline-text-description2 {
+    max-width: 400px;
+    text-align: center; /* 文字内容居中 */
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
