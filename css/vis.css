@@ -1,0 +1,398 @@
+/* 全局样式 */
+body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;    
+    height: 100%;
+    overflow-x: hidden;
+    background-color: rgb(255, 255, 255); /* 浅黄色背景 */
+}
+
+/* Header 样式 */
+header {
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgb(233,242,107); /* 浅黄色背景 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+
+    position: fixed; /* 固定位置 */
+    top: 0; /* 固定在页面顶部 */
+    left: 0;
+    width: 100%; /* 占满屏幕宽度 */
+    z-index: 1000; /* 确保导航栏在最前 */
+}
+/* Logo 样式 */
+.logo_box {
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+}
+
+.logo {
+    height: 60px; /* 设置 logo 高度 */
+}
+
+/* 导航菜单样式 */
+nav ul {
+    list-style: none; /* 移除列表样式 */
+    margin: 0;
+    padding-right: 150px;
+    display: flex;
+    gap: 90px; /* 设置菜单间距 */
+
+    font-family: "Orbitron", sans-serif; /* 设置字体为 Orbitron，无衬线字体为备用 */
+    font-size: 16px;
+}
+
+nav ul li a {
+    text-decoration: none; /* 移除下划线 */
+    color: black; /* 黑色文字 */
+    font-weight: bold;
+    border-bottom: 2px solid transparent; /* 默认透明下划线 */
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+    color: black;
+    border-bottom: 2px solid rgb(74, 188, 242); /* 添加蓝色下划线 */
+}
+
+/* cover 样式 */
+.cover_box {
+    position: relative;
+    text-align: center;
+    
+}
+
+.cover{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Footer 样式 */
+.footer {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: space-between; /* 平均分布列 */
+    align-items: flex-start; /* 顶部对齐 */
+    background-color: #4b4b26; /* 深绿色背景 */
+    color: white; /* 白色文字 */
+    padding: 20px 40px; /* 内边距 */
+    margin: 0;
+    height: auto;
+    
+
+}
+
+/* 单列样式 */
+.footer-column {
+    flex: 1; /* 平均分配列宽度 */
+    margin: 0 10px; /* 每列左右间距 */
+    padding-left: 100px;
+    
+}
+
+.footer-column h3 {
+    margin-bottom: 10px; /* 标题与内容的间距 */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-column ul {
+    list-style: none; /* 移除默认列表样式 */
+    padding: 0; /* 去掉内边距 */
+    margin: 0; /* 去掉外边距 */
+}
+
+.footer-column li {
+    margin-bottom: 4px; /* 每个项目之间的间距 */
+    font-size: 16px;
+}
+
+/* 链接样式 */
+.footer-column a {
+    color: white; /* 链接文字颜色 */
+    text-decoration: none; /* 移除下划线 */
+}
+
+.footer-column a:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+}
+
+/* 主容器样式 */
+.intro-section {
+    display: flex; /* 启用 Flexbox 布局 */
+    flex-direction: column; /* 垂直排列内容 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+    text-align: center; /* 文本内容居中对齐 */
+    height: 100%; /* 高度填充父元素 */
+    padding: 20px; /* 内边距 */
+    background: linear-gradient(to bottom, #ffff66, #ffffff); /* 黄到白渐变 */
+    
+}
+
+/* 主标题样式 */
+.main-title {
+    font-size: 50px; /* 大字体 */
+    font-family: 'Orbitron', sans-serif; /* 使用科技感字体（需要本地安装或从 Google Fonts 引入） */
+    font-weight: bold;
+    margin: 0; /* 移除默认外边距 */
+    padding-top: 60px;
+    
+}
+
+/* 副标题样式 */
+.sub-title {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 40px 0 10px; /* 设置上下间距 */
+    font-weight: bold; /* 加粗字体 */
+}
+
+/* 描述文本样式 */
+.description {
+    font-size: 24px;
+    line-height: 1.2; /* 设置行间距 */
+    margin: 0 auto; /* 居中 */
+    max-width: 800px; /* 最大宽度，限制内容宽度 */
+    padding-top: 40px;
+}
+
+.map-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    overflow: visible; /* 防止子内容超出边界 */
+    height: auto;
+}
+
+.map-container {
+    margin: 0 auto;
+    max-width: 1080px;
+    position: relative;
+    overflow: visible; /* 防止子元素溢出 */
+}
+
+.map-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#map-box {
+    width: 100%;
+    height: 500px; /* 固定高度 */
+    background-color: #d3d3d3; /* 地图背景色 */
+    border-radius: 10px; /* 圆角 */
+    border: 2px solid #929191; /* 边框样式 */
+    overflow: hidden;
+    position: relative; /* 防止绝对定位超出容器 */
+    z-index: 1;
+}
+
+.tooltip {
+    position: absolute;
+    background: white;
+    color: black;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px; /* 确保字体大小合适 */
+    pointer-events: none; /* 防止 tooltip 遮挡鼠标事件 */
+    visibility: hidden;
+    z-index: 1000; /* 确保 tooltip 显示在前面 */
+}
+
+/* map-text */
+.map-content {
+    text-align: center;
+    padding: 5px;
+    padding-bottom: 0px;
+    background-color: rgb(255, 255, 255);
+}
+
+.map_content-box {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.map_textad{
+    padding-top: 0px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    line-height: 1.2;
+
+}
+
+/* vis-chart */
+
+.chart-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.chart-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 0 auto;
+    max-width: 1026px;
+    padding-top: 40px;
+}
+
+#bar-chart {
+    width: 600px;
+    height: 400px;
+}
+
+.chart-description {
+    padding-top: 90px;
+    max-width: 400px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* timeline-chart */
+
+.timeline-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    overflow: visible; /* 防止子内容超出边界 */
+    height: auto;
+}
+
+.timeline-container {
+    margin: 0 auto;
+    max-width: 1080px;
+    position: relative;
+    overflow: visible; /* 防止子元素溢出 */
+}
+
+.timeline-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 50px;
+}
+
+#timeline-box {
+    width: 100%;
+    height: 500px; /* 固定高度 */
+    background-color: #d3d3d3; /* 地图背景色 */
+    border-radius: 10px; /* 圆角 */
+    border: 2px solid #929191; /* 边框样式 */
+    overflow: hidden;
+    position: relative; /* 防止绝对定位超出容器 */
+    z-index: 1;
+}
+
+/* timeline-text */
+
+.timeline-text-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.timeline-text-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.timeline-text-container {
+    display: flex;
+    justify-content: center; /* 水平方向居中 */
+    align-items: center; /* 垂直方向居中 */
+    gap: 40px;
+    margin: 0 auto;
+    max-width: 1026px;
+    padding-top: 40px;
+}
+
+.timeline-text-description1,
+.timeline-text-description2 {
+    max-width: 400px;
+    text-align: center; /* 文字内容居中 */
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* animation-chart */
+
+.animation-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    overflow: visible; /* 防止子内容超出边界 */
+    height: auto;
+}
+
+.animation-container {
+    margin: 0 auto;
+    max-width: 1080px;
+    position: relative;
+    overflow: visible; /* 防止子元素溢出 */
+}
+
+.animation-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 50px;
+}
+
+#animation-box {
+    width: 100%;
+    height: 500px; /* 固定高度 */
+    background-color: #d3d3d3; /* 地图背景色 */
+    border-radius: 10px; /* 圆角 */
+    border: 2px solid #929191; /* 边框样式 */
+    overflow: hidden;
+    position: relative; /* 防止绝对定位超出容器 */
+    z-index: 1;
+}
+
+/* animation-text */
+.animation-content {
+    height: 400px;
+    text-align: center;
+    padding: 20px 0; /* 添加顶部和底部内边距，避免内容靠边 */
+    background: linear-gradient(to bottom, #ffffff, #ffff66); /* 渐变颜色 */
+}
+
+.animation_content-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px; /* 增加内边距，避免内容与背景重叠 */
+    /*background-color: #ffffff; /* 背景为白色，强调内容区域 */
+    /*border-radius: 8px; /* 添加圆角，使内容区域更美观 */
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影以突出内容 */
+}
+
+.animation_textad {
+    margin: 0 auto; /* 内容居中 */
+    padding: 20px 10px; /* 5加上下内边距 */
+    font-size: 20px;
+    line-height: 1.5; /* 增加行高，提高可读性 */
+    color: #333; /* 字体颜色为深灰，增强对比度 */
+}

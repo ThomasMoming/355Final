@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Header</title>
+    <!-- 引入 Orbitron 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 加载 CSS 样式 -->
+    <link rel="stylesheet" href="css/vis.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+</head>
+<body>
+    <!-- 页面头部 -->
+    <header>
+        <!-- Logo -->
+        <div class="logo_box">
+            <img src="img/logo.png" alt="Cyberpunk Logo" class="logo">
+        </div>
+        <!-- 导航菜单 -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="vis.html">Visualization</a></li>
+                <li><a href="me.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- cover -->
+    <div>
+        <div class="cover_box">
+            <img src="img/cover3.jpg" alt="Cyberpunk cover" class="cover">
+        </div>
+     </div>
+
+
+     <!-- intro -->
+     <section class="intro-section">
+        <h1 class="main-title">CYBERPUNK2077</h1>
+        <h2 class="sub-title">Cyberpunk 2077 Player Activity Data</h2>
+        <p class="description">
+            The data in this project analyzes trends in Cyberpunk 2077 player activity, focusing on 
+            key events like DLC releases and spin-offs since the game’s launch. We gathered data 
+            mainly from SteamCharts, SteamDB, and gaming news sites, manually compiling it 
+            into a structured dataset for analysis.
+        </p>
+    </section>
+
+    <!-- map visualization -->
+    <section class="map-section">
+        <div class="map-container">
+            <h2 class="map-title">Cyberpunk 2077 Player Distribution Map</h2>
+            <svg id="map-box"></svg>
+        </div>
+        <script src="js/map.js"></script>
+    </section>
+
+    <!-- map text -->
+    <section class="map-content">
+        <div class="map_content-box">
+            <p class="map_textad">
+                Cyberpunk 2077 is an open-world role-playing game developed by CD Projekt Red and 
+                set in a futuristic city called Night City. Players take on the role of ‘V,’ a 
+                mercenary, and venture into a world of technophilia, social inequality, 
+                corporate domination, and hacker culture. The game's key 
+                features include rich character customisation, thrilling gun battles, 
+                a deep narrative, and reflections on a futuristic society, attracting many 
+                gamers into the sci-fi genre.
+            </p>
+        </div>
+    </section>
+
+    <!-- chart section -->
+    <section class="chart-section">
+        <h2 class="chart-title">Total number of hours played by CHINESE, ENGLISH, and OTHER players.</h2>
+        <div class="chart-container">
+            <!-- 图表 -->
+            <div id="bar-chart"></div>
+            <!-- 文本描述 -->
+            <div class="chart-description">
+                <p>
+                    The total number of hours played by Chinese players can be used to 
+                    determine the acceptance and enthusiasm of Cyberpunk 2077 by players in 
+                    that language region. If Chinese players account for a higher percentage of 
+                    total playtime, it indicates that the game has a wide reach in the 
+                    Chinese-speaking market and that players are willing to spend a significant 
+                    amount of time exploring the game's content.
+                </p>
+            </div>
+        </div>
+        <script src="js/vis_bar.js"></script>
+    </section>
+
+    <!-- time line vis -->
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <h2 class="timeline-title">Cyberpunk 2077 player online statistics</h2>
+            <svg id="timeline-box"></svg>
+        </div>
+        <script src="js/timeline.js"></script>
+    </section>
+
+        <!-- timeline section -->
+        <section class="timeline-text-section">
+            <h2 class="timeline-text-title">Analysis of the number of players online.</h2>
+            <div class="timeline-text-container">
+                <!-- 文本描述 -->
+                <div class="timeline-text-description1">
+                    <p>
+                        Early Peak (December 2020):
+                        ‘Player numbers peaked when the game was first released as people 
+                        had been waiting for this game for a long time.However, that buzz quickly 
+                        faded as technical issues came to light.
+
+                    </p>
+                </div>
+                <!-- 文本描述 -->
+                <div class="timeline-text-description2">
+                    <p>
+                        Stability and Recovery (2021 to 2022):
+                        ‘Player trust is gradually being restored and player 
+                        numbers are showing steady growth after multiple patch updates.’
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    <!-- Animation line vis -->
+    <section class="animation-section">
+        <div class="animation-container">
+            <h2 class="animation-title">animation</h2>
+            <svg id="animation-box"></svg>
+        </div>
+        <script src="js/animation"></script>
+    </section>    
+
+    <!-- animation text -->
+    <section class="animation-content">
+        <div class="animation_content-box">
+            <p class="animation_textad">
+                Cyberpunk 2077 is an open-world role-playing game developed by CD Projekt Red and 
+                set in a futuristic city called Night City. Players take on the role of ‘V,’ a 
+                mercenary, and venture into a world of technophilia, social inequality, 
+                corporate domination, and hacker culture. The game's key 
+                features include rich character customisation, thrilling gun battles, 
+                a deep narrative, and reflections on a futuristic society, attracting many 
+                gamers into the sci-fi genre.
+            </p>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="footer-column">
+            <h3>Data Source</h3>
+            <ul>
+                <li>Game8</li>
+                <li>SteamCharts</li>
+                <li>SteamDB</li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Steam</h3>
+            <ul>
+                <li>Cyberpunk2077</li>
+                <li><a href="https://store.steampowered.com" target="_blank">view on steam</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Official Website</h3>
+            <ul>
+                <li><a href="https://www.cyberpunk.net" target="_blank">Cyberpunk2077</a></li>
+            </ul>
+        </div>
+</footer>
+
+</body>
+</html>

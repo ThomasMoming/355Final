@@ -1,0 +1,466 @@
+/* 全局样式 */
+body {
+    margin: 0;
+    font-family: "Metal Mania", serif;
+    font-weight: 400;
+    font-style: normal;
+    /*font-size: 15px*/
+    background-color: rgb(233,242,107); /* 浅黄色背景 */
+}
+
+.metal-mania-regular {
+    font-family: "Metal Mania", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .intext p{
+    font-family: "Istok Web", sans-serif;
+    padding-top: 30px;
+    font-size: 16px;
+    line-height: 1.2;
+
+}
+
+  .istok-web-regular {
+    font-family: "Istok Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+/* Header 样式 */
+header {
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgb(233,242,107); /* 浅黄色背景 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+
+    position: fixed; /* 固定位置 */
+    top: 0; /* 固定在页面顶部 */
+    left: 0;
+    width: 100%; /* 占满屏幕宽度 */
+    z-index: 1000; /* 确保导航栏在最前 */
+}
+
+/* Logo 样式 */
+.logo_box {
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+}
+
+.logo {
+    height: 60px; /* 设置 logo 高度 */
+}
+
+/* 导航菜单样式 */
+nav ul {
+    list-style: none; /* 移除列表样式 */
+    margin: 0;
+    padding-right: 150px;
+    display: flex;
+    gap: 90px; /* 设置菜单间距 */
+
+    font-family: "Orbitron", sans-serif; /* 设置字体为 Orbitron，无衬线字体为备用 */
+    font-size: 16px;
+}
+
+nav ul li a {
+    text-decoration: none; /* 移除下划线 */
+    color: black; /* 黑色文字 */
+    font-weight: bold;
+    border-bottom: 2px solid transparent; /* 默认透明下划线 */
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+    color: black;
+    border-bottom: 2px solid rgb(74, 188, 242); /* 添加蓝色下划线 */
+}
+
+/* cover 样式 */
+.cover_box {
+    position: relative;
+    text-align: center;
+    
+}
+
+.cover{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Main Content 样式 */
+.main-content {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(233,242,107);
+}
+
+.content-box {
+    max-width: 800px;
+    margin: 0 auto;
+    /* 第一段文字大小 */
+}
+
+.content-logo {
+    height: 100px;
+    margin: 20px auto;
+    display: block;
+}
+
+.textad{
+    padding-top: 30px;
+    font-size: 24px;
+    line-height: 1.2;
+
+}
+
+/* Learn More 链接样式 */
+.learn-more {
+    display: inline-block; /* 将链接变为块状元素，适配图片尺寸 */
+    text-decoration: none; /* 移除默认的下划线效果 */
+    padding-top: 40px;
+}
+
+/* Learn More 图片样式 */
+.learn-more img {
+    width: 150px; /* 设置图片宽度，您可以根据需求调整 */
+    height: auto; /* 保持图片比例不变 */
+    transition: transform 0.3s ease; /* 鼠标悬停时的放大效果 */
+}
+
+/* 悬停效果 */
+.learn-more img:hover {
+    transform: scale(1.1); /* 鼠标悬停时，图片放大10% */
+}
+
+/* Additional Section 样式 */
+.additional-info {
+    font-family: "Metal Mania", serif;
+    
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.additional-info h2 {
+    font-family: "Istok Web", sans-serif;
+    font-style: Bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.additional-info p {
+    font-family: "Istok Web", sans-serif;
+    font-size: 20px; 
+    line-height: 1.2; /* 行间距 */
+    color: black;
+}
+
+.ad_textad{
+    padding-top: 30px;
+}
+
+/* 布局容器 */
+.layout {
+    display: grid; /* 使用网格布局 */
+    grid-template-rows: auto auto auto; /* 每行自动调整高度 */
+    gap: 20px; /* 设置网格项之间的间距 */
+    padding: 20px;
+    padding-top: 80px;
+    
+}
+
+/* 第一行列宽比例：左 40%，右 60% */
+.layout-row-1 {
+    display: grid;
+    grid-template-columns: 40% 60%; /* 左 40%，右 60% */
+    gap: 20px; /* 每列之间的间距 */
+    
+}
+
+/* 第二行列宽比例：左 60%，右 40% */
+.layout-row-2 {
+    display: grid;
+    grid-template-columns: 60% 40%; /* 左 60%，右 40% */
+    gap: 20px;
+
+}
+
+/* 第三行列宽比例：左 40%，右 60% */
+.layout-row-3 {
+    display: grid;
+    grid-template-columns: 40% 60%; /* 左 40%，右 60% */
+    gap: 20px;
+}
+
+/* 单个盒子样式 */
+.box {
+    overflow: hidden;
+    border-radius: 10px; /* 圆角 */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+
+/* 文本盒子 */
+.text-box {
+    font-family: "Istok Web", sans-serif;
+    text-align: center;
+    font-size: 16px; 
+    line-height: 1.2; /* 行间距 */
+    color: black;
+}
+
+/* 图表盒子 */
+.chart-box, .timeline-box {
+    width: auto;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    
+}
+.bar {
+    fill: rgb(233,242,107); /* 确保柱状图颜色明显 */
+}
+.label {
+    font-size: 12px; /* 设置合理字体大小 */
+    fill: white; /* 确保标签颜色可见 */
+}
+
+/* SVG 样式 */
+svg {
+    width: 100%; /* 确保 SVG 填满父容器宽度 */
+    height: 100%; /* 确保 SVG 填满父容器高度 */
+    border-radius: 10px; /*为 SVG 添加圆角 */
+    background-color: black;
+    overflow: visible;
+}
+
+ 
+.image-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* 圆角图片样式 */
+}
+
+/* 图片盒子 */
+.image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 布局容器 */
+.visualization-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* 左右比例为 1:2 */
+    gap: 20px; /* 设置左右内容的间距 */
+    padding: 40px;
+    align-items: center; /* 垂直居中对齐 */
+}
+
+/* 左侧内容样式 */
+.left-content {
+    text-align: left;
+}
+
+.left-content ul {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+    padding-left: 40px;
+}
+
+.left-content li {
+    font-size: 30px; /* 设置字体大小 */
+    margin-bottom: 20px; 
+    display: flex;
+    align-items: center;
+}
+
+/* 箭头图片样式 */
+.arrow-icon {
+    width: 50px; 
+    height: 40px; 
+    margin-right: 10px; /* 图片与文字的间距 */
+}
+
+/* 右侧图片样式 */
+.right-content img {
+    width: 100%; /* 图片宽度填充整个右侧容器 */
+    height: auto; /* 按比例缩放 */
+    border-radius: 10px; /* 添加圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 图片阴影效果 */
+}
+/* 链接样式 */
+.chart-link {
+    text-decoration: none; /* 移除链接下划线 */
+    color: black; /* 默认文字颜色 */
+    display: flex; /* 让图标和文字水平排列 */
+    align-items: center; /* 垂直居中对齐 */
+}
+/* 鼠标悬停效果 */
+.chart-link:hover {
+    color: rgb(160, 161, 165); /* 鼠标悬停时文字颜色变化 */
+}
+
+.des_vis {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    justify-content: flex-end; /* 让内容水平靠右对齐 */
+    padding:0; 
+}
+
+.des_vis h2 {
+    text-align: right; 
+    margin: 0; /* 移除默认外边距 */
+    padding-right: 40px;
+    padding-bottom: 40px;
+    font-style: bold;
+}
+
+
+/* Footer 样式 */
+.footer {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: space-between; /* 平均分布列 */
+    align-items: flex-start; /* 顶部对齐 */
+    background-color: #4b4b26; /* 深绿色背景 */
+    color: white; /* 白色文字 */
+    padding: 20px 40px; /* 内边距 */
+    
+
+}
+
+/* 单列样式 */
+.footer-column {
+    flex: 1; /* 平均分配列宽度 */
+    margin: 0 10px; /* 每列左右间距 */
+    padding-left: 100px;
+    
+}
+
+.footer-column h3 {
+    margin-bottom: 10px; /* 标题与内容的间距 */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-column ul {
+    list-style: none; /* 移除默认列表样式 */
+    padding: 0; /* 去掉内边距 */
+    margin: 0; /* 去掉外边距 */
+}
+
+.footer-column li {
+    margin-bottom: 4px; /* 每个项目之间的间距 */
+    font-size: 16px;
+}
+
+/* 链接样式 */
+.footer-column a {
+    color: white; /* 链接文字颜色 */
+    text-decoration: none; /* 移除下划线 */
+}
+
+.footer-column a:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+}
+
+/* 主容器样式 */
+.intro-section {
+    display: flex; /* 启用 Flexbox 布局 */
+    flex-direction: column; /* 垂直排列内容 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+    text-align: center; /* 文本内容居中对齐 */
+    height: 100%; /* 高度填充父元素 */
+    padding: 20px; /* 内边距 */
+    background: linear-gradient(to bottom, #ffff66, #ffffff); /* 黄到白渐变 */
+    
+}
+
+/* 主标题样式 */
+.main-title {
+    font-size: 50px; /* 大字体 */
+    font-family: 'Orbitron', sans-serif; /* 使用科技感字体（需要本地安装或从 Google Fonts 引入） */
+    font-weight: bold;
+    margin: 0; /* 移除默认外边距 */
+    padding-top: 60px;
+    
+}
+
+/* 副标题样式 */
+.sub-title {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 40px 0 10px; /* 设置上下间距 */
+    font-weight: bold; /* 加粗字体 */
+}
+
+/* 描述文本样式 */
+.description {
+    font-size: 24px;
+    line-height: 1.2; /* 设置行间距 */
+    margin: 0 auto; /* 居中 */
+    max-width: 800px; /* 最大宽度，限制内容宽度 */
+    padding-top: 40px;
+}
+
+.map-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    overflow: visible; /* 防止子内容超出边界 */
+}
+
+.map-container {
+    margin: 0 auto;
+    max-width: 1080px;
+    position: relative;
+    overflow: visible; /* 防止子元素溢出 */
+}
+
+.map-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#map-box {
+    width: 100%;
+    height: 500px; /* 固定高度，可根据需求调整 */
+    background-color: #d3d3d3; /* 地图背景色 */
+    border-radius: 10px; /* 圆角 */
+    border: 2px solid #929191; /* 边框样式 */
+    overflow: hidden;
+    position: relative; /* 防止绝对定位超出容器 */
+    z-index: 1;
+}
+
+/* map-text */
+.map-content {
+    text-align: center;
+    padding: 5px;
+    padding-bottom: 0px;
+    background-color: rgb(255, 255, 255);
+}
+
+.map_content-box {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.map_textad{
+    padding-top: 0px;
+    font-size: 24px;
+    line-height: 1.2;
+
+}
