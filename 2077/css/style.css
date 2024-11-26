@@ -1,11 +1,31 @@
 /* 全局样式 */
 body {
     margin: 0;
-    font-family: 'Times New Roman', Times, serif;    
-    
+    font-family: "Metal Mania", serif;
+    font-weight: 400;
+    font-style: normal;
+    /*font-size: 15px*/
     background-color: rgb(233,242,107); /* 浅黄色背景 */
 }
 
+.metal-mania-regular {
+    font-family: "Metal Mania", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .intext p{
+    font-family: "Istok Web", sans-serif;
+    padding-top: 30px;
+    font-size: 16px;
+    line-height: 1.2;
+
+}
+
+  .istok-web-regular {
+    font-family: "Istok Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 /* Header 样式 */
 header {
     
@@ -120,19 +140,23 @@ nav ul li a:hover {
 
 /* Additional Section 样式 */
 .additional-info {
+    font-family: "Metal Mania", serif;
+    
     text-align: center;
     padding: 30px 20px;
 }
 
 .additional-info h2 {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 24px;
+    font-family: "Istok Web", sans-serif;
+    font-style: Bold;
+    font-size: 20px;
     margin-bottom: 20px;
     color: black;
 }
 
 .additional-info p {
-    font-size: 24px; 
+    font-family: "Istok Web", sans-serif;
+    font-size: 20px; 
     line-height: 1.2; /* 行间距 */
     color: black;
 }
@@ -184,7 +208,9 @@ nav ul li a:hover {
 
 /* 文本盒子 */
 .text-box {
-    font-size: 24px; 
+    font-family: "Istok Web", sans-serif;
+    text-align: center;
+    font-size: 16px; 
     line-height: 1.2; /* 行间距 */
     color: black;
 }
