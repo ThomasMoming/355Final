@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log("GeoJSON Data Loaded:", geoJSONData);
 
     // 2. 解析 CSV 文件（语言分布数据）
-    const csvData = await d3.csv("data.set/cyberpunk_2077_filtered.csv"); // 替换为实际文件路径
+    const csvData = await d3.csv("./data.set/cyberpunk_2077_filtered.csv"); // 替换为实际文件路径
     console.log("CSV Data Loaded:", csvData);
 
     // 统计每种语言的评论数量

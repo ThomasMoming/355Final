@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     // 加载数据
-    const data = await d3.csv("data.set/cyberpunk2077_steamcharts.csv");
+    const data = await d3.csv("./data.set/cyberpunk2077_steamcharts.csv");
     const parsedData = data.map(d => ({
         time: d.Month, // 使用 Month 列作为 X 轴刻度
         year: d.Month.split(" ")[1], // 提取年份

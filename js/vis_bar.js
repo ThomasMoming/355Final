@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     // Load CSV data
-    const data = await d3.csv("data.set/cyberpunk_2077_filtered.csv");
+    const data = await d3.csv("./data.set/cyberpunk_2077_filtered.csv");
 
     // Aggregate playtime by language
     const aggregatedData = d3.rollups(
