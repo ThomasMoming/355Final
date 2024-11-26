@@ -186,7 +186,7 @@ nav ul li a:hover {
 
 #map-box {
     width: 100%;
-    height: 500px; /* 固定高度，可根据需求调整 */
+    height: 500px; /* 固定高度 */
     background-color: #d3d3d3; /* 地图背景色 */
     border-radius: 10px; /* 圆角 */
     border: 2px solid #929191; /* 边框样式 */
@@ -294,7 +294,7 @@ nav ul li a:hover {
 
 #timeline-box {
     width: 100%;
-    height: 500px; /* 固定高度，可根据需求调整 */
+    height: 500px; /* 固定高度 */
     background-color: #d3d3d3; /* 地图背景色 */
     border-radius: 10px; /* 圆角 */
     border: 2px solid #929191; /* 边框样式 */
@@ -337,3 +337,62 @@ nav ul li a:hover {
     color: #333;
 }
 
+/* animation-chart */
+
+.animation-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    overflow: visible; /* 防止子内容超出边界 */
+    height: auto;
+}
+
+.animation-container {
+    margin: 0 auto;
+    max-width: 1080px;
+    position: relative;
+    overflow: visible; /* 防止子元素溢出 */
+}
+
+.animation-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 50px;
+}
+
+#animation-box {
+    width: 100%;
+    height: 500px; /* 固定高度 */
+    background-color: #d3d3d3; /* 地图背景色 */
+    border-radius: 10px; /* 圆角 */
+    border: 2px solid #929191; /* 边框样式 */
+    overflow: hidden;
+    position: relative; /* 防止绝对定位超出容器 */
+    z-index: 1;
+}
+
+/* animation-text */
+.animation-content {
+    height: 400px;
+    text-align: center;
+    padding: 20px 0; /* 添加顶部和底部内边距，避免内容靠边 */
+    background: linear-gradient(to bottom, #ffffff, #ffff66); /* 渐变颜色 */
+}
+
+.animation_content-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px; /* 增加内边距，避免内容与背景重叠 */
+    /*background-color: #ffffff; /* 背景为白色，强调内容区域 */
+    /*border-radius: 8px; /* 添加圆角，使内容区域更美观 */
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影以突出内容 */
+}
+
+.animation_textad {
+    margin: 0 auto; /* 内容居中 */
+    padding: 20px 10px; /* 增加上下内边距 */
+    font-size: 20px;
+    line-height: 1.5; /* 增加行高，提高可读性 */
+    color: #333; /* 字体颜色为深灰，增强对比度 */
+}
