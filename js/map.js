@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log("GeoJSON Data Loaded:", geoJSONData);
 
     // 2. 解析 CSV 文件（语言分布数据）
-    const csvData = await d3.csv("./data.set/cyberpunk_2077_filtered.csv"); // 替换为实际文件路径
+    const csvData = await d3.csv("./data.set/cyberpunk_2077_filtered.csv"); 
     console.log("CSV Data Loaded:", csvData);
     d3.csv("data.set/cyberpunk2077_steamcharts.csv").then(data => {
         console.log(data); // 检查加载的数据
