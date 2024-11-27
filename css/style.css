@@ -82,6 +82,7 @@ nav ul li a:hover {
 
 /* cover 样式 */
 .cover_box {
+    width: 100%;
     position: relative;
     text-align: center;
     
@@ -123,6 +124,7 @@ nav ul li a:hover {
 .learn-more {
     display: inline-block; /* 将链接变为块状元素，适配图片尺寸 */
     text-decoration: none; /* 移除默认的下划线效果 */
+    margin-bottom: 100px;
     padding-top: 40px;
 }
 
@@ -208,8 +210,9 @@ nav ul li a:hover {
 
 /* 文本盒子 */
 .text-box {
+    margin-top: 50px;
     font-family: "Istok Web", sans-serif;
-    text-align: center;
+    text-align: left;
     font-size: 16px; 
     line-height: 1.2; /* 行间距 */
     color: black;
@@ -463,4 +466,129 @@ svg {
     font-size: 24px;
     line-height: 1.2;
 
+}
+/*@media screen and (max-width: 1920px){
+    body{
+        font-size: 16px;
+
+    }
+    
+}*/
+@media screen and (max-width: 1024px) {
+    body {
+        font-size: 14px; /* 縮小字體 */
+    }
+
+    header {
+        padding: 10px 15px; /* 減小內邊距 */
+    }
+
+    .logo_box {
+        padding-left: 20px; /* 調整 logo 的位置 */
+    }
+
+    nav ul {
+        gap: 50px; /* 減小導航間距 */
+        padding-right: 50px;
+    }
+
+    .content-box {
+        max-width: 90%; /* 減少內容框的寬度 */
+    }
+
+    .main-title {
+        font-size: 40px; /* 減小主標題字體 */
+    }
+
+    .sub-title {
+        font-size: 20px; /* 減小副標題字體 */
+    }
+
+    .description {
+        font-size: 18px; /* 減小描述文字字體 */
+    }
+}
+
+/* 當屏幕寬度小於 768px（手機設備） */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 12px; /* 再次縮小字體 */
+    }
+
+    header {
+        flex-direction: column; /* 將導航欄改為垂直排列 */
+        align-items: flex-start; /* 左對齊內容 */
+        padding: 10px;
+    }
+
+    nav ul {
+        flex-direction: column; /* 垂直顯示導航項 */
+        gap: 20px; /* 增大間距 */
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul li {
+        text-align: left; /* 導航文字左對齊 */
+    }
+
+    .logo {
+        height: 50px; /* 縮小 logo */
+    }
+
+    .content-box {
+        max-width: 100%; /* 內容框全屏顯示 */
+        padding: 10px;
+    }
+
+    .main-title {
+        font-size: 30px; /* 縮小主標題字體 */
+    }
+
+    .sub-title {
+        font-size: 18px; /* 縮小副標題字體 */
+    }
+
+    .description {
+        font-size: 16px; /* 調整描述文字字體 */
+    }
+
+    .learn-more img {
+        width: 120px; /* 減小圖片尺寸 */
+    }
+}
+
+/* 當屏幕寬度小於 480px（超小屏幕或手機） */
+@media screen and (max-width: 480px) {
+    header {
+        padding: 5px; /* 減小內邊距 */
+    }
+
+    .logo {
+        height: 40px; /* 再次縮小 logo */
+    }
+
+    .content-box {
+        padding: 5px; /* 縮小內邊距 */
+    }
+
+    .main-title {
+        font-size: 24px; /* 調整主標題字體 */
+    }
+
+    .sub-title {
+        font-size: 16px; /* 調整副標題字體 */
+    }
+
+    .description {
+        font-size: 14px; /* 調整描述文字字體 */
+    }
+
+    nav ul {
+        gap: 10px; /* 縮小導航間距 */
+    }
+
+    .learn-more img {
+        width: 100px; /* 縮小 learn-more 圖片尺寸 */
+    }
 }
