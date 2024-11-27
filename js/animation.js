@@ -1,3 +1,4 @@
+let boolConversionCount = 0; // 在全局或回调函数外定义计数器
 document.addEventListener("DOMContentLoaded", async function () {
     const svg = d3.select("#animation-box");
     const width = parseInt(svg.style("width"));
@@ -20,7 +21,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // 预处理步骤：将各种格式的 voted_up 转换为标准布尔值
         const voted_up = d.voted_up === "TRUE" || d.voted_up === "1" || d.voted_up === true;
-
+        if (typeof voted_up === "boolean") {
+            boolConversionCount++; // 成功转换时增加计数
+        }
         return {
             date: new Date(d.updated.split(" ")[0]), // 提取日期并转换为 Date 对象
             voted_up: voted_up // 标准化为布尔值
