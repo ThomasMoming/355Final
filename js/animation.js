@@ -1,4 +1,4 @@
-let boolConversionCount = 0; // 在全局或回调函数外定义计数器
+let boolConversionCount = 0; // 在全局定义计数器
 document.addEventListener("DOMContentLoaded", async function () {
     const svg = d3.select("#animation-box");
     const width = parseInt(svg.style("width"));
@@ -13,23 +13,24 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     // 加载 CSV 数据并进行预处理
-    const data = await d3.csv("data.set/cyberpunk_2077_filtered.csv", d => {
-        if (!d.updated || typeof d.voted_up === "undefined") {
+    const data = await d3.csv("data.set/cyberpunk_reviews_6month.csv", d => {
+        if (!d.timestamp || !d.rating) {
             console.warn("Skipping invalid row:", d);
             return null; // 过滤无效数据
         }
 
-        // 预处理步骤：将各种格式的 voted_up 转换为标准布尔值
-        const voted_up = d.voted_up === "TRUE" || d.voted_up === "1" || d.voted_up === true;
+        // 转换 rating 为布尔值
+        const voted_up = d.rating === "positive";
         if (typeof voted_up === "boolean") {
             boolConversionCount++; // 成功转换时增加计数
         }
         return {
-            date: new Date(d.updated.split(" ")[0]), // 提取日期并转换为 Date 对象
+            date: new Date(d.timestamp.split(" ")[0]), // 提取日期并转换为 Date 对象
             voted_up: voted_up // 标准化为布尔值
         };
     }).then(data => data.filter(d => d !== null)); // 过滤掉无效数据
 
+    console.log("成功转换为布尔值的记录数量:", boolConversionCount);
     console.log("Sample Data:", data.slice(0, 10)); // 检查数据结构
 
     // 数据分组到每个季度
@@ -57,11 +58,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     console.log("Formatted Data:", formattedData); // 检查格式化数据
 
-    // 设置比例尺
+    // 动态计算 bar 宽度，确保在数据量较多时不会超出范围
+    const barWidth = Math.min(innerWidth / (formattedData.length * 4), 20); // 设置最大宽度为20px
+    const barOffset = barWidth; // 定义柱状图的整体偏移量
+
+    // 设置比例尺，留出额外空间
     const xScale = d3
         .scaleTime()
-        .domain(d3.extent(formattedData, d => d.date))
-        .range([0, innerWidth]);
+        .domain([
+            d3.min(formattedData, d => d.date),
+            d3.max(formattedData, d => d.date)
+        ])
+        .range([barWidth, innerWidth - barWidth]); // 留出柱状图宽度的空间
 
     const yScale = d3
         .scaleLinear()
@@ -86,31 +94,30 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     chartGroup.append("g").call(yAxis);
 
-    // 添加柱状图
-    const barWidth = innerWidth / formattedData.length / 3; // 计算每组柱状的宽度
-
-    chartGroup
+    // 添加正面柱状图
+    const positiveBars = chartGroup
         .selectAll(".bar-positive")
         .data(formattedData)
         .enter()
         .append("rect")
         .attr("class", "bar-positive")
-        .attr("x", d => xScale(d.date) - barWidth)
-        .attr("y", d => yScale(d.positive))
+        .attr("x", d => xScale(d.date) - barOffset) // 向右偏移
+        .attr("y", innerHeight) // 初始位置在底部
         .attr("width", barWidth)
-        .attr("height", d => innerHeight - yScale(d.positive))
+        .attr("height", 0) // 初始高度为0
         .attr("fill", "green");
 
-    chartGroup
+    // 添加负面柱状图
+    const negativeBars = chartGroup
         .selectAll(".bar-negative")
         .data(formattedData)
         .enter()
         .append("rect")
         .attr("class", "bar-negative")
-        .attr("x", d => xScale(d.date))
-        .attr("y", d => yScale(d.negative))
+        .attr("x", d => xScale(d.date)) // 与正面柱状图偏移不同
+        .attr("y", innerHeight) // 初始位置在底部
         .attr("width", barWidth)
-        .attr("height", d => innerHeight - yScale(d.negative))
+        .attr("height", 0) // 初始高度为0
         .attr("fill", "red");
 
     // 添加图例
@@ -132,6 +139,81 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("height", 20)
         .attr("fill", "red");
     legend.append("text").attr("x", 25).attr("y", 45).text("Negative").style("font-size", "12px");
+
+    // 动画函数
+    const animateBars = () => {
+        positiveBars.transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .attr("y", d => yScale(d.positive))
+            .attr("height", d => innerHeight - yScale(d.positive));
+
+        negativeBars.transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .attr("y", d => yScale(d.negative))
+            .attr("height", d => innerHeight - yScale(d.negative));
+    };
+
+    // 自动播放动画
+    animateBars();
+
+    // 在动画部分创建按钮容器
+    const buttonContainer = svg
+    .append("g")
+    .attr("transform", `translate(${width + margin.right - 100}, 10)`); // 调整按钮容器的位置
+
+    // 定义按钮列表
+    ["Replay", "Reset"].forEach((action, i) => {
+    // 添加按钮背景
+    buttonContainer
+        .append("rect")
+        .attr("x", 0+16)
+        .attr("y", i * 30) // 增加按钮之间的间隔
+        .attr("width", 50) // 按钮宽度
+        .attr("height", 25) // 按钮高度
+        .attr("rx", 3) // 圆角半径
+        .attr("ry", 3) // 圆角半径
+        .style("fill", "#e6e6e6") // 按钮背景色
+        .style("stroke", "#aaa") // 按钮边框颜色
+        .style("stroke-width", 0.5);
+
+    // 添加按钮文本
+    buttonContainer
+        .append("text")
+        .attr("x", 40) // 文本居中
+        .attr("y", i * 30 + 17) // 与矩形匹配，并垂直居中
+        .style("cursor", "pointer")
+        .style("font-size", "12px")
+        .style("fill", "black")
+        .style("text-anchor", "middle") // 文本水平居中
+        .text(action)
+        .on("click", () => handleAction(action)); // 根据动作名称调用对应函数
+    });
+
+    // 动作处理函数
+    const handleAction = (action) => {
+    switch (action) {
+        case "Replay":
+            console.log("Replay button clicked!");
+            animateBars(); // 重新播放动画
+            break;
+    case "Reset":
+        console.log("Reset button clicked!");
+        // 重置柱状图至初始状态
+        d3.selectAll(".bar-positive")
+            .attr("y", innerHeight)
+            .attr("height", 0);
+
+        d3.selectAll(".bar-negative")
+            .attr("y", innerHeight)
+            .attr("height", 0);
+        break;
+    default:
+        console.error("Unknown action:", action);
+    }
+    };
+
 
     console.log("Positive Reviews Count:", data.filter(d => d.voted_up).length);
     console.log("Negative Reviews Count:", data.filter(d => !d.voted_up).length);
