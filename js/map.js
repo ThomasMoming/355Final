@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         english: [-98.35, 39.50], // 美国经纬度
         french: [2.2137, 46.2276], // 法国经纬度
         schinese: [104.1954, 35.8617], // 中国经纬度
-        korean: [127.7669, 35.9078], // 韩国经纬度
+        koreana: [127.7669, 35.9078], // 韩国经纬度
         spanish: [-3.7038, 40.4168], // 西班牙经纬度（马德里）
         russian: [37.6173, 55.7558], // 俄罗斯经纬度（莫斯科）
         turkish: [35.2433, 39.9208], // 土耳其经纬度（安卡拉）
