@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
+    // Define a color scale using d3.schemeCategory10
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
     // X-axis scale
     const x = d3
         .scaleBand()
@@ -70,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             d3.axisLeft(y).tickFormat((d) => `${Math.round(d / 1_000_000)}M`) // Compress units to M
         );
 
-    // Draw bars
+    // Draw bars with color scale
     svg.selectAll(".bar")
         .data(finalData)
         .enter()
@@ -80,9 +83,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("y", (d) => y(d.playtime))
         .attr("width", x.bandwidth())
         .attr("height", (d) => height - y(d.playtime))
-        .attr("fill", (d, i) =>
-            i % 3 === 0 ? "steelblue" : i % 3 === 1 ? "orange" : "green"
-        );
+        .attr("fill", (d) => colorScale(d.language)); // Assign color based on language
 
     // Add playtime labels on top of bars
     svg.selectAll(".bar-label")
@@ -104,7 +105,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        
         .text("Total Play Hours by Player Language");
 
     // Add X-axis label

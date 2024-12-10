@@ -27,6 +27,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("width", containerWidth)
         .attr("height", containerHeight);
 
+           /*調整背景顏色*/
+           svg.append("rect")
+           .attr("x", 0)
+           .attr("y", 0)
+           .attr("width", containerWidth)
+           .attr("height", containerHeight)
+           .attr("fill", "#F7F7F7");
+
     // 主图和刷选图组
     const focus = svg
         .append("g")
@@ -75,6 +83,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .style("text-anchor", "end");
 
     focus.append("g").call(d3.axisLeft(yScale));
+ 
 
     // 主图线条生成器
     const lineGenerator = d3
@@ -87,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .append("path")
         .datum(parsedData)
         .attr("fill", "none")
-        .attr("stroke", "green")
+        .attr("stroke", "#7fccf5")
         .attr("stroke-width", 2)
         .attr("d", lineGenerator);
 
@@ -114,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .append("path")
         .datum(parsedData)
         .attr("fill", "none")
-        .attr("stroke", "gray")
+        .attr("stroke", "black")
         .attr("stroke-width", 1)
         .attr("d", lineGeneratorContext);
 
@@ -148,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             .attr("cx", d => xScale(d.time) + xScale.bandwidth() / 2)
             .attr("cy", d => yScale(d.players))
             .attr("r", 4)
-            .attr("fill", "green")
+            .attr("fill", "#7fccf5")
             .on("mouseover", (event, d) => {
                 d3.select(event.currentTarget).attr("fill", "yellow").attr("r", 6);
                 tooltip
@@ -161,7 +170,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     .style("left", `${event.pageX + 10}px`);
             })
             .on("mouseout", (event) => {
-                d3.select(event.currentTarget).attr("fill", "green").attr("r", 4);
+                d3.select(event.currentTarget).attr("fill", "#7fccf5").attr("r", 4);
                 tooltip.style("visibility", "hidden");
             });
         };
@@ -225,7 +234,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             .append("path")
             .datum(filteredData)
             .attr("fill", "none")
-            .attr("stroke", "green")
+            .attr("stroke", "#7fccf5")
             .attr("stroke-width", 2)
             .attr("d", lineGenerator);
 

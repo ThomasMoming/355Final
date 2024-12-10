@@ -27,96 +27,116 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Chart dimensions after margins:", { width, height, margin });
 
     // 创建 SVG 容器
-const svg = d3
-    .select("#sales-chart")
-    .attr("width", containerWidth)
-    .attr("height", containerHeight)
-    .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
-console.log("SVG container created:", svg);
+    const svg = d3
+        .select("#sales-chart")
+        .attr("width", containerWidth)
+        .attr("height", containerHeight)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// X轴比例尺
-const xScale = d3
-    .scaleBand()
-    .domain(data.map((d) => d.year))
-    .range([0, width])
-    .padding(0.6);
-console.log("X Scale domain and range:", xScale.domain(), xScale.range());
+    // 添加背景矩形
+    svg.append("rect")
+        .attr("x", -margin.left)
+        .attr("y", -margin.top)
+        .attr("width", containerWidth)
+        .attr("height", containerHeight)
+        .attr("fill", "black"); // 背景颜色改为白色
 
-// Y轴比例尺
-const yScale = d3
-    .scaleLinear()
-    .domain([0, d3.max(data, (d) => d.sales) * 1.1]) // 给最大值增加一些空间
-    .range([height, 0]);
-console.log("Y Scale domain and range:", yScale.domain(), yScale.range());
+    console.log("SVG container created:", svg);
 
-// 添加 X轴
-svg.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(xScale).tickFormat((d) => d.toString()))
-    .attr("color", "white") // 修改轴线和文字为白色
-    .selectAll("line") // 选择所有刻度线
-    .attr("stroke", "white"); // 修改刻度线为白色
+    // X轴比例尺
+    const xScale = d3
+        .scaleBand()
+        .domain(data.map((d) => d.year))
+        .range([0, width])
+        .padding(0.6);
 
-// 添加 Y轴
-svg.append("g")
-    .call(d3.axisLeft(yScale).ticks(5).tickFormat((d) => `$${d}M`))
-    .attr("color", "white") // 修改轴线和文字为白色
-    .selectAll("line") // 选择所有刻度线
-    .attr("stroke", "white"); // 修改刻度线为白色
+    // Y轴比例尺
+    const yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(data, (d) => d.sales) * 1.1]) // 给最大值增加一些空间
+        .range([height, 0]);
 
-// 验证每个数据点的 x 和 y 是否在范围内
-data.forEach((d) => {
-    const x = xScale(d.year);
-    const y = yScale(d.sales);
-    console.log(`Year: ${d.year}, X: ${x}, Y: ${y}, Bandwidth: ${xScale.bandwidth()}, Sales: ${d.sales}`);
-    if (x < 0 || x + xScale.bandwidth() > width) {
-        console.error(`X value out of bounds for year ${d.year}: ${x}`);
-    }
-    if (y < 0 || y > height) {
-        console.error(`Y value out of bounds for year ${d.year}: ${y}`);
-    }
+    // 添加 X轴
+    svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(xScale).tickFormat((d) => d.toString()))
+        .attr("color", "white") // 修改轴线和文字为黑色
+        .selectAll("line")
+        .attr("stroke", "white"); // 修改刻度线为黑色
+
+    // 添加 Y轴
+    svg.append("g")
+        .call(d3.axisLeft(yScale).ticks(5).tickFormat((d) => `$${d}M`))
+        .attr("color", "white") // 修改轴线和文字为黑色
+        .selectAll("line")
+        .attr("stroke", "white"); // 修改刻度线为黑色
+    
+
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", height + 40) // 位于 X轴下方
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .attr("font-size", "14px")
+        .text("Year");
+
+    // 添加 Y轴标签
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -height / 2)
+        .attr("y", -53) // 位于 Y轴左侧
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .attr("font-size", "14px")
+        .text("Million USD");
+
+
+    // 添加图例容器
+    const legendContainer = svg.append("g")
+        .attr("transform", `translate(${width - 100}, ${-margin.top / 2})`);
+
+    // 添加图例矩形
+    legendContainer.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 10)
+        .attr("height", 10)
+        .attr("fill", "#7fccf5");
+
+    // 添加图例文本
+    legendContainer.append("text")
+        .attr("x", 15)
+        .attr("y", 10)
+        .attr("font-size", "12px")
+        .attr("fill", "white") // 文字颜色改为黑色
+        .text("Sales (in million USD)");
+
+    // 添加柱状图
+    svg.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", (d) => xScale(d.year))
+        .attr("y", (d) => yScale(d.sales))
+        .attr("width", xScale.bandwidth())
+        .attr("height", (d) => height - yScale(d.sales))
+        .attr("fill", "#7fccf5");
+        
+
+    // 添加柱状图顶部的文字标签
+    svg.selectAll(".label")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("class", "label")
+        .attr("x", (d) => xScale(d.year) + xScale.bandwidth() / 2)
+        .attr("y", (d) => yScale(d.sales) - 5)
+        .attr("text-anchor", "middle")
+        .attr("fill", "white") // 文字颜色改为黑色
+        .text((d) => `$${d.sales.toFixed(2)}M`);
 });
-
-// 添加柱状图
-const bars = svg
-    .selectAll(".bar")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("class", "bar")
-    .attr("x", (d) => xScale(d.year))
-    .attr("y", (d) => yScale(d.sales))
-    .attr("width", xScale.bandwidth())
-    .attr("height", (d) => height - yScale(d.sales))
-    .attr("fill", "yellow")
-    .each((d) => {
-        console.log(`Bar created: Year: ${d.year}, X: ${xScale(d.year)}, Y: ${yScale(d.sales)}, Height: ${height - yScale(d.sales)}`);
-    });
-console.log("Bars created:", bars);
-
-// 添加柱状图顶部的文字标签
-const labels = svg
-    .selectAll(".label")
-    .data(data)
-    .enter()
-    .append("text")
-    .attr("class", "label")
-    .attr("x", (d) => xScale(d.year) + xScale.bandwidth() / 2)
-    .attr("y", (d) => yScale(d.sales) - 5)
-    .attr("text-anchor", "middle")
-    .text((d) => `$${d.sales.toFixed(2)}M`)
-    .each((d) => {
-        const x = xScale(d.year) + xScale.bandwidth() / 2;
-        const y = yScale(d.sales) - 5;
-        console.log(`Label created: Year: ${d.year}, X: ${x}, Y: ${y}`);
-    });
-console.log("Labels added:", labels);
-
-
-
-});
-
 
 
 
@@ -157,22 +177,48 @@ document.addEventListener("DOMContentLoaded", function () {
         .append("g")
         .attr("transform", `translate(${timelineMargin.left},${timelineMargin.top})`);
 
+    // 添加背景矩形
+    timelineSvg.append("rect")
+        .attr("x", -timelineMargin.left)
+        .attr("y", -timelineMargin.top)
+        .attr("width", timelineWidth)
+        .attr("height", timelineHeight)
+        .attr("fill", "black"); // 背景颜色改为白色
+
     console.log("Timeline SVG container created:", timelineSvg);
+
+    // 添加图例容器
+    const timelineLegendContainer = timelineSvg.append("g")
+        .attr("transform", `translate(${timelineInnerWidth - 150}, ${-timelineMargin.top / 2})`);
+
+    // 添加图例圆点
+    timelineLegendContainer.append("circle")
+        .attr("cx", 0)
+        .attr("cy", 5)
+        .attr("r", 5)
+        .attr("fill", "white");
+
+    // 添加图例文本
+    timelineLegendContainer.append("text")
+        .attr("x", 15)
+        .attr("y", 10)
+        .attr("font-size", "12px")
+        .attr("fill", "white") // 文字颜色改为黑色
+        .text("Publish quantity in Millions");
 
     // X轴比例尺（时间）
     const xTimelineScale = d3
         .scalePoint()
         .domain(timelineData.map((d) => d.date))
         .range([0, timelineInnerWidth])
-        .padding(0.5);
-    console.log("X Scale for timeline:", xTimelineScale.domain(), xTimelineScale.range());
+        .padding(0.5)
+        
 
     // Y轴比例尺（销售量）
     const yTimelineScale = d3
         .scaleLinear()
         .domain([0, d3.max(timelineData, (d) => d.sales) * 1.1]) // 给最大值增加空间
         .range([timelineInnerHeight, 0]);
-    console.log("Y Scale for timeline:", yTimelineScale.domain(), yTimelineScale.range());
 
     // 添加 X轴
     timelineSvg.append("g")
@@ -180,31 +226,47 @@ document.addEventListener("DOMContentLoaded", function () {
         .call(d3.axisBottom(xTimelineScale))
         .selectAll("text")
         .style("text-anchor", "middle")
-        .style("fill", "white");
+        .style("fill", "white"); // 修改 X轴文字颜色为黑色
     timelineSvg.selectAll(".domain, .tick line")
-        .attr("stroke", "white"); // 刻度尺颜色
-    console.log("Timeline X Axis added");
+        .attr("stroke", "white"); // 修改 X轴刻度线颜色为黑色
 
     // 添加 Y轴
     timelineSvg.append("g")
         .call(d3.axisLeft(yTimelineScale).ticks(5))
         .selectAll("text")
-        .style("fill", "white");
+        .style("fill", "white"); // 修改 Y轴文字颜色为黑色
     timelineSvg.selectAll(".domain, .tick line")
-        .attr("stroke", "white"); // 刻度尺颜色
-    console.log("Timeline Y Axis added");
+        .attr("stroke", "white"); // 修改 Y轴刻度线颜色为黑色
+
+      // 添加 X轴标签
+      timelineSvg.append("text")
+      .attr("x", timelineInnerWidth / 2)
+      .attr("y", timelineInnerHeight + 40) // 位于 X轴下方
+      .attr("text-anchor", "middle")
+      .attr("fill", "white")
+      .attr("font-size", "14px")
+      .text("Year");
+
+  // 添加 Y轴标签
+  timelineSvg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -timelineInnerHeight / 2)
+      .attr("y", -50) // 位于 Y轴左侧
+      .attr("text-anchor", "middle")
+      .attr("fill", "white")
+      .attr("font-size", "14px")
+      .text("Million");
 
     // 绘制折线
     timelineSvg.append("path")
         .datum(timelineData)
         .attr("fill", "none")
-        .attr("stroke", "yellow") // 折线颜色
+        .attr("stroke", "#7fccf5") // 折线颜色
         .attr("stroke-width", 2)
         .attr("d", d3.line()
             .x((d) => xTimelineScale(d.date))
             .y((d) => yTimelineScale(d.sales))
         );
-    console.log("Timeline line path created");
 
     // 添加数据点
     timelineSvg.selectAll(".dot")
@@ -215,8 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("cx", (d) => xTimelineScale(d.date))
         .attr("cy", (d) => yTimelineScale(d.sales))
         .attr("r", 5)
-        .attr("fill", "white"); // 数据点颜色
-    console.log("Timeline dots added");
+        .attr("fill", "white"); // 数据点颜色改为黑色
 
     // 添加数据点标签
     timelineSvg.selectAll(".label")
@@ -227,10 +288,10 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("x", (d) => xTimelineScale(d.date))
         .attr("y", (d) => yTimelineScale(d.sales) - 10)
         .attr("text-anchor", "middle")
-        .style("fill", "white")
+        .style("fill", "black") // 标签文字颜色改为黑色
         .text((d) => d.sales);
-    console.log("Timeline labels added");
 });
+
 
 
 

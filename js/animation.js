@@ -7,10 +7,19 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
+    
+    svg.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "#f7f7f7"); // 背景颜色
 
     const chartGroup = svg
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    
 
     // 加载 CSV 数据并进行预处理
     const data = await d3.csv("data.set/cyberpunk_reviews_6month.csv", d => {
@@ -105,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("y", innerHeight) // 初始位置在底部
         .attr("width", barWidth)
         .attr("height", 0) // 初始高度为0
-        .attr("fill", "green");
+        .attr("fill", "#7fccf5");
 
     // 添加负面柱状图
     const negativeBars = chartGroup
@@ -118,7 +127,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("y", innerHeight) // 初始位置在底部
         .attr("width", barWidth)
         .attr("height", 0) // 初始高度为0
-        .attr("fill", "red");
+        .attr("fill", "#FFE55B");
 
     // 添加图例
     const legend = svg.append("g").attr("transform", `translate(${width - 150}, ${margin.top})`);
@@ -128,8 +137,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("y", 0)
         .attr("width", 20)
         .attr("height", 20)
-        .attr("fill", "green");
-    legend.append("text").attr("x", 25).attr("y", 15).text("Positive").style("font-size", "12px");
+        .attr("fill", "#7fccf5");
+    legend.append("text").attr("x", 25).attr("y", 15).text("Yes").style("font-size", "12px");
 
     legend
         .append("rect")
@@ -137,8 +146,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("y", 30)
         .attr("width", 20)
         .attr("height", 20)
-        .attr("fill", "red");
-    legend.append("text").attr("x", 25).attr("y", 45).text("Negative").style("font-size", "12px");
+        .attr("fill", "#FFE55B");
+    legend.append("text").attr("x", 25).attr("y", 45).text("No").style("font-size", "12px");
 
     // 动画函数
     const animateBars = () => {

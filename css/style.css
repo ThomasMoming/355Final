@@ -210,11 +210,14 @@ nav ul li a:hover {
 
 /* 文本盒子 */
 .text-box {
-    margin-top: 50px;
+    margin-top: 0px;
     font-family: "Istok Web", sans-serif;
     text-align: left;
-    font-size: 16px; 
-    line-height: 1.2; /* 行间距 */
+    text-size-adjust: margin-top;
+    font-size: 18px; 
+    line-height: 1.5; /* 增大行间距以提升可读性 */
+    letter-spacing: 0.02em; /* 设置字母间距，0.05em 为适中值 */
+    word-spacing: 0.01em;
     color: black;
 }
 
@@ -228,9 +231,17 @@ nav ul li a:hover {
     display: block;
     
 }
-.bar {
-    fill: rgb(233,242,107); /* 确保柱状图颜色明显 */
+.chartcm-box {
+    width: auto;
+    height: 400px;
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    
 }
+
 .label {
     font-size: 12px; /* 设置合理字体大小 */
     fill: white; /* 确保标签颜色可见 */
@@ -244,7 +255,9 @@ svg {
     background-color: black;
     overflow: visible;
 }
-
+.bar {
+    fill: #7fccf5; /* CS東西 住 */
+}
  
 .image-box img {
     width: 100%;
@@ -257,6 +270,18 @@ svg {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.imagew3-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imagew3-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* 圆角图片样式 */
+    margin-top: -100px;
 }
 
 /* 布局容器 */
@@ -591,4 +616,32 @@ svg {
     .learn-more img {
         width: 100px; /* 縮小 learn-more 圖片尺寸 */
     }
+
+    /* 左側視頻樣式 */
+    .video-container {
+        display: flex;
+        justify-content: flex; /* 確保內容靠左對齊 */
+        padding-left: 100px; /* 左邊留空隙 */
+        background-color: #f7f7f7;
+    }
+
+    .video-box {
+        width: 430px; /* iPhone 15 Pro Max 的寬度 */
+        height: 932px; /* iPhone 15 Pro Max 的高度 */
+        background-color: #ffffff; /* 背景颜色 */
+        border-radius: 16px; /* 圓角 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* 隐藏溢出的内容 */
+        margin-top: 20px; /* 與上方間距 */
+    }
+
+    .video-box video {
+        width: 95%; /* 视频占 box 的 95% */
+        height: auto; /* 高度按比例调整 */
+    }
+
+
 }
