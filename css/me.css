@@ -93,3 +93,51 @@ nav ul li a:hover {
         font-size: 12px; /* 再次缩小字体 */
     }
 }
+
+/* 团队部分样式 */
+.team-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.team-member {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.member-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.member-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.member-role {
+    font-size: 1.2em;
+    color: #888;
+    margin-bottom: 15px;
+}
+

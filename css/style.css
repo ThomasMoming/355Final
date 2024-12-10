@@ -492,6 +492,13 @@ svg {
     line-height: 1.2;
 
 }
+.team-photo {
+    width: 400px !important;
+    height: auto !important;
+    border-radius: 10px; /* 圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    margin-left: 300px; /* 与左侧文本间距 */
+}
 /*@media screen and (max-width: 1920px){
     body{
         font-size: 16px;
@@ -583,6 +590,7 @@ svg {
     }
 }
 
+
 /* 當屏幕寬度小於 480px（超小屏幕或手機） */
 @media screen and (max-width: 480px) {
     header {
@@ -639,9 +647,8 @@ svg {
     }
 
     .video-box video {
-        width: 95%; /* 视频占 box 的 95% */
+        width: 50%; /* 视频占 box 的 95% */
         height: auto; /* 高度按比例调整 */
     }
-
 
 }
