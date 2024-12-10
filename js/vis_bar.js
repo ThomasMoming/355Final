@@ -42,8 +42,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Define a color scale using d3.schemeCategory10
-    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+    // **Define custom blue shades**
+    const blueShades = [
+        "#5CBFF7", // Default blue
+        "#B8EAFA", // Lighter blue
+        "#1B79AE", // Even lighter blue
+        "#94CAE1", // Lightest blue
+    ];
 
     // X-axis scale
     const x = d3
@@ -73,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             d3.axisLeft(y).tickFormat((d) => `${Math.round(d / 1_000_000)}M`) // Compress units to M
         );
 
-    // Draw bars with color scale
+    // **Draw bars with custom blue colors**
     svg.selectAll(".bar")
         .data(finalData)
         .enter()
@@ -83,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("y", (d) => y(d.playtime))
         .attr("width", x.bandwidth())
         .attr("height", (d) => height - y(d.playtime))
-        .attr("fill", (d) => colorScale(d.language)); // Assign color based on language
+        .attr("fill", (d, i) => blueShades[i % blueShades.length]); // Use different blue shades
 
     // Add playtime labels on top of bars
     svg.selectAll(".bar-label")
@@ -123,4 +128,23 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("text-anchor", "middle")
         .style("font-size", "12px")
         .text("Total Playtime (million hours)");
+
+
+    const legend = svg.append("g").attr("transform", `translate(${width - 150}, ${-margin.top / 2})`);
+
+    blueShades.forEach((color, index) => {
+        const language = finalData[index]?.language || "Other";
+        legend.append("rect")
+            .attr("x", 50)
+            .attr("y", index * 20-10)
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("fill", color);
+
+        legend.append("text")
+            .attr("x", 90)
+            .attr("y", index * 20+2 )
+            .style("font-size", "12px")
+            .text(language);
+    });
 });
