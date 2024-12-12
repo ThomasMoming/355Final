@@ -199,7 +199,7 @@ nav ul li a:hover {
 /* 布局容器 */
 .layout {
     display: grid; /* 使用网格布局 */
-    grid-template-rows: 1fr 1fr 1fr; /* 每行高度相等 */
+    grid-template-rows: auto auto auto; /* 每行高度相等 */
     gap: 20px; /* 设置网格项之间的间距 */
     row-gap: 60px;
     padding: 20px;
@@ -220,7 +220,7 @@ nav ul li a:hover {
 .layout-row-2 {
     display: grid;
     grid-template-columns: 60% 40%; /* 左 60%，右 40% */
-    gap: 60px;
+    gap: 20px;
     row-gap: 40px;
     align-items: stretch; /* 强制拉伸行内内容 */
 }
@@ -236,14 +236,16 @@ nav ul li a:hover {
 
 /* 单个盒子样式 */
 .box {
-    overflow: hidden;
+    overflow: auto; /* 设置为 auto 以启用滚动条，防止溢出 */
     border-radius: 10px; /* 圆角 */
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
     display: flex;
     flex-direction: column; /* 确保内部内容垂直排列 */
     justify-content: space-between; /* 确保内容间距均匀 */
-    height: 100%; /* 自动填充父容器的高度 */
+    height: auto; /* 根据内容自适应高度 */
+    max-height: 100%; /* 防止高度超出父容器 */
+    box-sizing: border-box; /* 确保 padding 和 border 包含在高度计算中 */
 }
 
 /* 文本盒子 */
@@ -251,29 +253,36 @@ nav ul li a:hover {
     margin: 0; /* 清除外边距，避免不必要的空白 */
     padding: 20px; /* 确保文本内容有足够的内边距 */
     font-family: "Istok Web", sans-serif;
-    align-items: center;
     font-size: 18px; 
     line-height: 1.5; /* 增大行间距以提升可读性 */
     letter-spacing: 0.02em; /* 设置字母间距 */
     word-spacing: 0.01em;
     color: black;
-    height: 100%; /* 确保文本高度与父容器一致 */
+    height: auto; /* 自动调整高度以适配内容 */
+    overflow: auto; /* 启用滚动条以处理超出内容 */
 }
 
 /* 图表盒子 */
 .chart-box, .timeline-box, .chartcm-box {
     width: 100%; /* 确保图表填充父容器宽度 */
-    height: 100%; /* 确保图表高度响应父容器 */
+    height: auto; /* 根据内容自动调整高度 */
+    max-height: 500px; /* 设置最大高度，避免溢出父容器 */
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* 防止图表内容超出容器 */
 }
 
 /* 图表中的 SVG 调整 */
 .chart-box svg, .timeline-box svg, .chartcm-box svg {
-    width: 100%; /* 确保图表填充父容器 */
-    height: 100%; /* 确保图表高度响应父容器 */
-}
+    width: 100%;
+    height: auto;
+    min-height: 400px; /* 设置最低高度 */
+    max-height: 100%; /* 防止高度超出父容器 */
+    overflow: hidden;
+    }
+    
+
 
 /* 标签样式 */
 .label {
@@ -288,7 +297,7 @@ svg {
     height: 100%; /* 确保 SVG 填满父容器高度 */
     border-radius: 10px; /*为 SVG 添加圆角 */
     background-color: black;
-    overflow: visible;
+    overflow: hidden;
 }
 .bar {
     fill: #7fccf5; /* CS東西 住 */
@@ -305,6 +314,7 @@ svg {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden
 }
 
 .imagew3-box {
@@ -313,13 +323,16 @@ svg {
     height: 100%;
     justify-content: center;
     align-items: center;
+    overflow: hidden
 }
 .imagew3-box img {
     width: 100%;
     height: auto;
     border-radius: 10px; /* 圆角图片样式 */
-    margin-top: -100px;
+    margin-top: 0; /* 清除负值偏移 */
 }
+
+
 
 /* 布局容器 */
 .visualization-section {
