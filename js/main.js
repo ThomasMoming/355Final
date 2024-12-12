@@ -1,5 +1,19 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const navMenu = document.getElementById("nav-menu");
+
+    menuToggle.addEventListener("click", () => {
+        navMenu.querySelector("ul").classList.toggle("show");
+    });
+});
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("main.js loaded");
+
+
+
 
     // 数据：PLN 转换为 USD（1 PLN ≈ 0.25 USD）
     const data = [

@@ -11,6 +11,7 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
 </head>
+
 <body>
     <!-- 页面头部 -->
     <header>
@@ -19,21 +20,52 @@
             <img src="img/logo.png" alt="Cyberpunk Logo" class="logo">
         </div>
         <!-- 导航菜单 -->
-        <nav>
+        <nav id="nav-menu">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="vis.html">Visualization</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="me.html">About Us</a></li>
             </ul>
         </nav>
+        <!-- 菜单按钮 -->
+        <button id="menu-toggle" class="menu-btn">
+            ☰
+        </button>
     </header>
 
+    <!-- cover -->
+    <div>
+        <div class="cover_box">
+            <img src="img/cover1.jpg" alt="Cyberpunk cover" class="cover">
+        </div>
+     </div>
+
     <!-- 团队部分 -->
-    <section class="team-section">
-        <h1 class="section-title">who we are</h1>
-        
-        
-    </section>
+    <section class="content-section">
+        <div class="image-container">
+          <img src="img/thomas.jpg" alt="Image/Contact.jpg" class="resizable-image">
+      </div>
+      <div class="text-container">
+        <h2 id="contactInfo_H">Contact Information</h2>
+          <p id="contactInfo_Text">
+              <strong>Email:</strong> ThomasMoming@gmail.com<br>
+              <strong>Phone:</strong> 236-868-8512
+          </p>
+      </div>
+      </section>
+
+      <section class="content-section">
+        <div class="image-container">
+          <img src="img/wilson.jpg" alt="Image/Contact.jpg" class="resizable-image">
+      </div>
+      <div class="text-container">
+        <h2 id="contactInfo_H">Contact Information</h2>
+          <p id="contactInfo_Text">
+              <strong>Email:</strong> ThomasMoming@gmail.com<br>
+              <strong>Phone:</strong> 236-868-8512
+          </p>
+      </div>
+      </section>
 
     <!-- footer -->
     <footer class="footer">
@@ -59,6 +91,6 @@
             </ul>
         </div>
 </footer>
-    
+<script src="js/me.js"></script>
 </body>
 </html>

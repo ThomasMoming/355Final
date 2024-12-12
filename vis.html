@@ -13,20 +13,24 @@
 </head>
 <body>
     <!-- 页面头部 -->
-    <header>
-        <!-- Logo -->
-        <div class="logo_box">
-            <img src="img/logo.png" alt="Cyberpunk Logo" class="logo">
-        </div>
-        <!-- 导航菜单 -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="vis.html">Visualization</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-            </ul>
-        </nav>
-    </header>
+        <header>
+            <!-- Logo -->
+            <div class="logo_box">
+                <img src="img/logo.png" alt="Cyberpunk Logo" class="logo">
+            </div>
+            <!-- 导航菜单 -->
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vis.html">Visualization</a></li>
+                    <li><a href="me.html">About Us</a></li>
+                </ul>
+            </nav>
+            <!-- 菜单按钮 -->
+            <button id="menu-toggle" class="menu-btn">
+                ☰
+            </button>
+        </header>
 
     <!-- cover -->
     <div>
@@ -50,7 +54,7 @@
     </section>
 
     <!-- map visualization -->
-    <section class="map-section">
+    <section id="map-section" class="map-section">
         <div class="map-container">
             <h2 class="map-title">Tracking Gamer World: How Cyberpunk 2077 Connects Players Across the Globe</h2>
             <svg id="map-box"></svg>
@@ -80,7 +84,7 @@
     </section>
 
     <!-- chart section -->
-    <section class="chart-section">
+    <section id="hour-section" class="chart-section">
         <h2 class="chart-title">Millions of Hours, One Game: A Global Snapshot of Cyberpunk 2077 Playtime </h2>
         <div class="chart-container">
             <!-- 图表 -->
@@ -98,7 +102,7 @@
     </section>
 
     <!-- time line vis -->
-    <section class="timeline-section">
+    <section id="timeline-section"class="timeline-section">
         <div class="timeline-container">
             <h2 class="timeline-title">Explore more on different time zone that player active with</h2>
             <svg id="timeline-box"></svg>
@@ -138,7 +142,7 @@
         </section>
 
     <!-- Animation line vis -->
-    <section class="animation-section">
+    <section id="animation-section"class="animation-section">
         <div class="animation-container">
             <h2 class="animation-title">From Criticism to Redemption: The Evolution of Cyberpunk 2077 Player Sentiment</h2>
             <svg id="animation-box"></svg>

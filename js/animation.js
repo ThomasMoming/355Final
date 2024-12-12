@@ -7,19 +7,17 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
-    
+
     svg.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", width)
-    .attr("height", height)
-    .attr("fill", "#f7f7f7"); // 背景颜色
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", width)
+        .attr("height", height)
+        .attr("fill", "#f7f7f7"); // 背景颜色
 
     const chartGroup = svg
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
-
-    
 
     // 加载 CSV 数据并进行预处理
     const data = await d3.csv("data.set/cyberpunk_reviews_6month.csv", d => {
@@ -103,6 +101,17 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     chartGroup.append("g").call(yAxis);
 
+    // 添加工具提示框
+    const tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("background", "#fff")
+        .style("border", "1px solid #ccc")
+        .style("padding", "5px")
+        .style("border-radius", "5px")
+        .style("visibility", "hidden");
+
     // 添加正面柱状图
     const positiveBars = chartGroup
         .selectAll(".bar-positive")
@@ -114,7 +123,32 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("y", innerHeight) // 初始位置在底部
         .attr("width", barWidth)
         .attr("height", 0) // 初始高度为0
-        .attr("fill", "#7fccf5");
+        .attr("fill", "#7fccf5")
+        .on("mouseover", function (event, d) {
+            d3.select(this).attr("fill", "#FFD700");
+        
+            let additionalText = ""; // 初始化额外文本
+        
+            // 根据时间添加额外文本
+            if (d3.timeFormat("%Y Q%q")(d.date) === "2022 Q3") {
+                additionalText = " - Cyberpunk 2077 Edgewalker released, the game's popularity rises.";
+            } else if (d3.timeFormat("%Y Q%q")(d.date) === "2023 Q3") {
+                additionalText = " - DLC Phantom Liberty released, positive reviews rising.";
+            }
+        
+            tooltip
+                .style("visibility", "visible")
+                .html(`Positive: ${d.positive}<br>${additionalText}`); // 显示额外文本
+        })
+        .on("mousemove", function (event) {
+            tooltip
+                .style("top", `${event.pageY - 10}px`)
+                .style("left", `${event.pageX + 10}px`);
+        })
+        .on("mouseout", function () {
+            d3.select(this).attr("fill", "#7fccf5");
+            tooltip.style("visibility", "hidden");
+        });
 
     // 添加负面柱状图
     const negativeBars = chartGroup
@@ -127,7 +161,32 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("y", innerHeight) // 初始位置在底部
         .attr("width", barWidth)
         .attr("height", 0) // 初始高度为0
-        .attr("fill", "#FFE55B");
+        .attr("fill", "#FFE55B")
+        .on("mouseover", function (event, d) {
+            d3.select(this).attr("fill", "#FFD700");
+        
+            let additionalText = ""; // 初始化额外文本
+        
+            // 根据时间添加额外文本
+            if (d3.timeFormat("%Y Q%q")(d.date) === "2022 Q3") {
+                additionalText = " - Cyberpunk 2077 Edgewalker released, the game's popularity rises.";
+            } else if (d3.timeFormat("%Y Q%q")(d.date) === "2023 Q3") {
+                additionalText = " - DLC Phantom Liberty released, positive reviews rising.";
+            }
+        
+            tooltip
+                .style("visibility", "visible")
+                .html(`Negative: ${d.negative}<br>${additionalText}`); // 显示额外文本
+        })
+        .on("mousemove", function (event) {
+            tooltip
+                .style("top", `${event.pageY - 10}px`)
+                .style("left", `${event.pageX + 10}px`);
+        })
+        .on("mouseout", function () {
+            d3.select(this).attr("fill", "#FFE55B");
+            tooltip.style("visibility", "hidden");
+        });
 
     // 添加图例
     const legend = svg.append("g").attr("transform", `translate(${width - 150}, ${margin.top})`);
@@ -138,7 +197,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("width", 20)
         .attr("height", 20)
         .attr("fill", "#7fccf5");
-    legend.append("text").attr("x", 25).attr("y", 15).text("Yes").style("font-size", "12px");
+    legend.append("text").attr("x", 25).attr("y", 15).text("Positive").style("font-size", "12px");
 
     legend
         .append("rect")
@@ -147,7 +206,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attr("width", 20)
         .attr("height", 20)
         .attr("fill", "#FFE55B");
-    legend.append("text").attr("x", 25).attr("y", 45).text("No").style("font-size", "12px");
+    legend.append("text").attr("x", 25).attr("y", 45).text("Negative").style("font-size", "12px");
 
     // 动画函数
     const animateBars = () => {
@@ -169,60 +228,59 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // 在动画部分创建按钮容器
     const buttonContainer = svg
-    .append("g")
-    .attr("transform", `translate(${width + margin.right - 100}, 10)`); // 调整按钮容器的位置
+        .append("g")
+        .attr("transform", `translate(${width + margin.right - 100}, 10)`); // 调整按钮容器的位置
 
     // 定义按钮列表
     ["Replay", "Reset"].forEach((action, i) => {
-    // 添加按钮背景
-    buttonContainer
-        .append("rect")
-        .attr("x", 0+16)
-        .attr("y", i * 30) // 增加按钮之间的间隔
-        .attr("width", 50) // 按钮宽度
-        .attr("height", 25) // 按钮高度
-        .attr("rx", 3) // 圆角半径
-        .attr("ry", 3) // 圆角半径
-        .style("fill", "#e6e6e6") // 按钮背景色
-        .style("stroke", "#aaa") // 按钮边框颜色
-        .style("stroke-width", 0.5);
+        // 添加按钮背景
+        buttonContainer
+            .append("rect")
+            .attr("x", 0 + 16)
+            .attr("y", i * 30) // 增加按钮之间的间隔
+            .attr("width", 50) // 按钮宽度
+            .attr("height", 25) // 按钮高度
+            .attr("rx", 3) // 圆角半径
+            .attr("ry", 3) // 圆角半径
+            .style("fill", "#e6e6e6") // 按钮背景色
+            .style("stroke", "#aaa") // 按钮边框颜色
+            .style("stroke-width", 0.5);
 
-    // 添加按钮文本
-    buttonContainer
-        .append("text")
-        .attr("x", 40) // 文本居中
-        .attr("y", i * 30 + 17) // 与矩形匹配，并垂直居中
-        .style("cursor", "pointer")
-        .style("font-size", "12px")
-        .style("fill", "black")
-        .style("text-anchor", "middle") // 文本水平居中
-        .text(action)
-        .on("click", () => handleAction(action)); // 根据动作名称调用对应函数
+        // 添加按钮文本
+        buttonContainer
+            .append("text")
+            .attr("x", 40) // 文本居中
+            .attr("y", i * 30 + 17) // 与矩形匹配，并垂直居中
+            .style("cursor", "pointer")
+            .style("font-size", "12px")
+            .style("fill", "black")
+            .style("text-anchor", "middle") // 文本水平居中
+            .text(action)
+            .on("click", () => handleAction(action)); // 根据动作名称调用对应函数
     });
 
     // 动作处理函数
     const handleAction = (action) => {
-    switch (action) {
-        case "Replay":
-            console.log("Replay button clicked!");
-            animateBars(); // 重新播放动画
-            break;
-    case "Reset":
-        console.log("Reset button clicked!");
-        // 重置柱状图至初始状态
-        d3.selectAll(".bar-positive")
-            .attr("y", innerHeight)
-            .attr("height", 0);
+        switch (action) {
+            case "Replay":
+                console.log("Replay button clicked!");
+                animateBars(); // 重新播放动画
+                break;
+            case "Reset":
+                console.log("Reset button clicked!");
+                // 重置柱状图至初始状态
+                d3.selectAll(".bar-positive")
+                    .attr("y", innerHeight)
+                    .attr("height", 0);
 
-        d3.selectAll(".bar-negative")
-            .attr("y", innerHeight)
-            .attr("height", 0);
-        break;
-    default:
-        console.error("Unknown action:", action);
-    }
+                d3.selectAll(".bar-negative")
+                    .attr("y", innerHeight)
+                    .attr("height", 0);
+                break;
+            default:
+                console.error("Unknown action:", action);
+        }
     };
-
 
     console.log("Positive Reviews Count:", data.filter(d => d.voted_up).length);
     console.log("Negative Reviews Count:", data.filter(d => !d.voted_up).length);

@@ -157,12 +157,16 @@ document.addEventListener("DOMContentLoaded", async function () {
             .attr("cx", d => xScale(d.time) + xScale.bandwidth() / 2)
             .attr("cy", d => yScale(d.players))
             .attr("r", 4)
-            .attr("fill", "#7fccf5")
+            .attr("fill", d => (d.time === "September 2023" || d.time === "September 2022") ? "#f57f89" : "#7fccf5")
             .on("mouseover", (event, d) => {
                 d3.select(event.currentTarget).attr("fill", "yellow").attr("r", 6);
                 tooltip
                     .style("visibility", "visible")
-                    .html(`<strong>${d.time}</strong><br>Players: ${d.players.toLocaleString()}`);
+                    .html(
+                        `<strong>${d.time}</strong><br>Players: ${d.players.toLocaleString()}<br>` +
+                        (d.time === "September 2023" ? "DLC:Cyberpunk 2077: Phantom Liberty" : "") +
+                        (d.time === "September 2022" ? "Extend:Cyberpunk: Edgerunners" : "")
+                    );
             })
             .on("mousemove", (event) => {
                 tooltip
@@ -170,7 +174,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                     .style("left", `${event.pageX + 10}px`);
             })
             .on("mouseout", (event) => {
-                d3.select(event.currentTarget).attr("fill", "#7fccf5").attr("r", 4);
+                d3.select(event.currentTarget)
+                .attr("fill", d => (d.time === "September 2023" || d.time === "September 2022") ? "#f57f89" : "#7fccf5")
+                .attr("r", 4);
                 tooltip.style("visibility", "hidden");
             });
         };
