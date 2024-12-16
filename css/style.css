@@ -239,7 +239,7 @@ nav ul li a:hover {
     overflow: auto; /* 设置为 auto 以启用滚动条，防止溢出 */
     border-radius: 10px; /* 圆角 */
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
     display: flex;
     flex-direction: column; /* 确保内部内容垂直排列 */
     justify-content: space-between; /* 确保内容间距均匀 */
